@@ -36,7 +36,7 @@
 </script>
 
 <div class="traffic-light">
-    {#each lightOrder as light}
+    {#each Object.keys(lights) as light}
         <div class={[...lights[light].class, 'light'].join(' ')} />
     {/each}
 </div>

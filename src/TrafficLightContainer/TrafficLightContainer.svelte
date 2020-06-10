@@ -17,7 +17,7 @@
             timeToDisplay: 5,
         },
     };
-    let lightOrder = Object.keys(lights);
+    let lightOrder = ['red', 'green', 'yellow'];
 
     function toggleIsRunning() {
         isRunning = !isRunning;
