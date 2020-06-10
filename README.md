@@ -9,7 +9,7 @@ App is deployed using Now: https://traffic-light.andrewywoo.now.sh
 Install the dependencies...
 
 ```bash
-cd svelte-app
+cd traffic-light
 npm install
 ```
 
