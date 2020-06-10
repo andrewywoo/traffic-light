@@ -3,18 +3,31 @@
     export let lights;
     export let lightOrder;
     export let handleLightSwitch;
-    import { onDestroy } from 'svelte';
+    import { onDestroy, beforeUpdate, afterUpdate } from 'svelte';
 
     let seconds = 0;
-    let currentLight = 0;
-    $: interval = isRunning && setInterval(runTrafficLight, 1000)
+    let currentLightIndex = 0;
+    let interval;
+
+    beforeUpdate(() => {
+        clearInterval(interval);
+    });
+
+    afterUpdate(() => {
+        interval = isRunning && setInterval(runTrafficLight, 1000);
+    });
 
     function runTrafficLight() {
-        console.log(lights[lightOrder[currentLight]]);
         seconds += 1;
-        if (seconds >= lights[lightOrder[currentLight]].timeToDisplay) {
-            handleLightSwitch(lightOrder[currentLight]);
-            currentLight === 2 ? currentLight = 0 : currentLight += 1;
+        
+        const currentLight = lightOrder[currentLightIndex];
+        const timeToDisplayCurrentLight = lights[currentLight].timeToDisplay;
+
+        if (seconds >= timeToDisplayCurrentLight) {
+            handleLightSwitch(currentLightIndex);
+
+            // Move to next light index after switching lights.
+            currentLightIndex === 2 ? currentLightIndex = 0 : currentLightIndex += 1;
             seconds = 0;
         }
     }
@@ -23,8 +36,8 @@
 </script>
 
 <div class="traffic-light">
-    {#each lightOrder as light}
-        <div class={lights[light].class.join(' ')} />
+    {#each Object.keys(lights) as light}
+        <div class={[...lights[light].class, 'light'].join(' ')} />
     {/each}
 </div>
 

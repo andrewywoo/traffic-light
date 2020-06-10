@@ -5,34 +5,44 @@
     let isRunning = false;
     let lights = {
         red: {
-            class: ['light', 'red'],
+            class: ['red'],
             timeToDisplay: 8,
         },
         yellow: {
-            class: ['light', 'yellow', 'off'],
+            class: ['yellow', 'off'],
             timeToDisplay: 3,
         },
         green: {
-            class: ['light', 'green', 'off'],
+            class: ['green', 'off'],
             timeToDisplay: 5,
         },
     };
-    let lightOrder = Object.keys(lights);
+    let lightOrder = ['red', 'green', 'yellow'];
 
-    function handleRun() {
+    function toggleIsRunning() {
         isRunning = !isRunning;
     }
 
-    function handleLightSwitch(currentLight) {
+    function handleLightSwitch(currentLightIndex) {
+        // Adds 'off' class to current light
+        const currentLight = lightOrder[currentLightIndex];
         lights[currentLight].class = [...lights[currentLight].class, 'off'];
-        const nextLightIndex = (lightOrder.indexOf(currentLight) + 1) > 2 ? 0 : lightOrder.indexOf(currentLight) + 1;
-        lights[lightOrder[nextLightIndex]].class = ['light', lightOrder[nextLightIndex]];
+
+        // Increments current index to find next light index
+        let nextLightIndex = currentLightIndex + 1;
+        if (nextLightIndex > 2) {
+            nextLightIndex = 0;
+        }
+
+        // Reassigns class name without 'off' class
+        const nextLight = lightOrder[nextLightIndex];
+        lights[nextLight].class = [lightOrder[nextLightIndex]];
     }
 
 </script>
 
 <div class="traffic-light-container">
-    <Controls handleRun={handleRun} lights={lights} isRunning={isRunning} />
+    <Controls toggleIsRunning={toggleIsRunning} lights={lights} isRunning={isRunning} />
     <TrafficLight isRunning={isRunning} lights={lights} lightOrder={lightOrder} handleLightSwitch={handleLightSwitch} />
 </div>
 
