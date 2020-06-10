@@ -1,6 +1,8 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Traffic Lights App
 
----
+Taking a simple use case of a configurable traffic light to learn Svelte.
+
+App is deployed using Now: https://traffic-light.andrewywoo.now.sh
 
 # svelte app
 
