@@ -3,17 +3,11 @@
     export let lights;
     export let lightOrder;
     export let handleLightSwitch;
-    import { onDestroy, afterUpdate } from 'svelte';
+    import { onDestroy } from 'svelte';
 
     let seconds = 0;
     let currentLight = 0;
-    let interval;
-
-    afterUpdate(() => {
-        isRunning ?
-            interval = setInterval(runTrafficLight, 1000)
-            : clearInterval(interval);
-    });
+    $: interval = isRunning && setInterval(runTrafficLight, 1000)
 
     function runTrafficLight() {
         console.log(lights[lightOrder[currentLight]]);
