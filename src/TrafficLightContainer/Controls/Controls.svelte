@@ -7,11 +7,11 @@
 
 <div class="controls">
     <label for="red">Red Timer (seconds):</label>
-    <input type="number" id="red" bind:value={red.displayInSeconds} />
+    <input type="number" id="red" bind:value={red.timeToDisplay} />
     <label for="yellow">Yellow Timer (seconds):</label>
-    <input type="number" id="yellow" bind:value={yellow.displayInSeconds} />
+    <input type="number" id="yellow" bind:value={yellow.timeToDisplay} />
     <label for="green">Green Timer (seconds):</label>
-    <input type="number" id="green" bind:value={green.displayInSeconds} />
+    <input type="number" id="green" bind:value={green.timeToDisplay} />
     <br>
     <button on:click={handleRun}>
         {#if isRunning} 

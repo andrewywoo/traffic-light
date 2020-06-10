@@ -5,38 +5,35 @@
     let isRunning = false;
     let lights = {
         red: {
-            id: 'red',
             class: ['light', 'red'],
-            displayInSeconds: 8,
+            timeToDisplay: 8,
         },
         yellow: {
-            id: 'yellow',
             class: ['light', 'yellow', 'off'],
-            displayInSeconds: 3,
+            timeToDisplay: 3,
         },
         green: {
-            id: 'green',
             class: ['light', 'green', 'off'],
-            displayInSeconds: 5,
+            timeToDisplay: 5,
         },
     };
+    let lightOrder = Object.keys(lights);
 
     function handleRun() {
         isRunning = !isRunning;
     }
 
-    $: {
-        console.log(isRunning, lights);
+    function handleLightSwitch(currentLight) {
+        lights[currentLight].class = [...lights[currentLight].class, 'off'];
+        const nextLightIndex = (lightOrder.indexOf(currentLight) + 1) > 2 ? 0 : lightOrder.indexOf(currentLight) + 1;
+        lights[lightOrder[nextLightIndex]].class = ['light', lightOrder[nextLightIndex]];
     }
 
 </script>
 
 <div class="traffic-light-container">
-    <Controls 
-        handleRun={handleRun} 
-        lights={lights} 
-        isRunning={isRunning} />
-    <TrafficLight isRunning={isRunning} lights={lights} />
+    <Controls handleRun={handleRun} lights={lights} isRunning={isRunning} />
+    <TrafficLight isRunning={isRunning} lights={lights} lightOrder={lightOrder} handleLightSwitch={handleLightSwitch} />
 </div>
 
 <style>
