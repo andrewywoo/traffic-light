@@ -1,18 +1,24 @@
 <script>
-	export let name;
+	// import Card from './Card.svelte';
+	import TrafficLightContainer from './TrafficLightContainer/TrafficLightContainer.svelte';
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<!-- <div style="display: flex;">
+		<Card name="Andrew" occupation="Software Engineer" age={31} color="blue" />
+		<Card name="Kathleen" occupation="Nurse" age={30} color="green" />
+		<Card name="Cameron" occupation="Accountant" age={28} color="blue" />
+	</div> -->
+	<TrafficLightContainer />
+
 </main>
 
 <style>
 	main {
 		text-align: center;
 		padding: 1em;
-		max-width: 240px;
 		margin: 0 auto;
+
 	}
 
 	h1 {
@@ -20,11 +26,5 @@
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
 	}
 </style>
